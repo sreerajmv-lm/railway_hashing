@@ -1,0 +1,205 @@
+
+RAILWAY BOOKING SYSTEM USING HASHING
+====================================
+
+Booking IDs:
+23, 43, 13, 33, 53, 63, 73
+
+Hash Table Size:
+11
+
+Hash Function:
+h(k) = k % 11
+
+
+1. LINEAR PROBING
+------------------
+
+Formula:
+hi(k) = (h(k) + i) % 11
+
+| Booking ID | Hash Value | Probe Positions | Final Position |
+|------------|------------|-----------------|----------------|
+| 23         | 1          | 1               | 1              |
+| 43         | 10         | 10              | 10             |
+| 13         | 2          | 2               | 2              |
+| 33         | 0          | 0               | 0              |
+| 53         | 9          | 9               | 9              |
+| 63         | 8          | 8               | 8              |
+| 73         | 7          | 7               | 7              |
+
+Observation:
+No collision occurs during insertion.
+
+
+Final Hash Table:
+
+Index:  0   1   2   3   4   5   6   7   8   9   10
+Value: 33  23  13   -   -   -   -  73  63  53   43
+
+
+2. QUADRATIC PROBING
+---------------------
+
+Formula:
+hi(k) = (h(k) + i^2) % 11
+
+| Booking ID | Hash Value | Probe Positions | Final Position |
+|------------|------------|-----------------|----------------|
+| 23         | 1          | 1               | 1              |
+| 43         | 10         | 10              | 10             |
+| 13         | 2          | 2               | 2              |
+| 33         | 0          | 0               | 0              |
+| 53         | 9          | 9               | 9              |
+| 63         | 8          | 8               | 8              |
+| 73         | 7          | 7               | 7              |
+
+Observation:
+No collision occurs during insertion.
+
+
+Final Hash Table:
+
+Index:  0   1   2   3   4   5   6   7   8   9   10
+Value: 33  23  13   -   -   -   -  73  63  53   43
+
+
+3. DOUBLE HASHING
+------------------
+
+First hash function:
+h1(k) = k % 11
+
+Second hash function:
+h2(k) = 7 - (k % 7)
+
+Formula:
+hi(k) = (h1(k) + i × h2(k)) % 11
+
+| Booking ID | h1(k) | h2(k) | Probe Positions | Final Position |
+|------------|-------|-------|-----------------|----------------|
+| 23         | 1     | 5     | 1               | 1              |
+| 43         | 10    | 6     | 10              | 10             |
+| 13         | 2     | 1     | 2               | 2              |
+| 33         | 0     | 2     | 0               | 0              |
+| 53         | 9     | 3     | 9               | 9              |
+| 63         | 8     | 7     | 8               | 8              |
+| 73         | 7     | 4     | 7               | 7              |
+
+Observation:
+No collision occurs during insertion.
+
+
+Final Hash Table:
+
+Index:  0   1   2   3   4   5   6   7   8   9   10
+Value: 33  23  13   -   -   -   -  73  63  53   43
+
+
+4. SEARCH TRACE
+----------------
+
+Selected keys:
+53 - Existing
+73 - Existing
+12 - Non-existing
+
+
+Search for 53:
+
+Hash value:
+53 % 11 = 9
+
+Index 9 contains 53.
+
+Probes = 1
+
+
+Search for 73:
+
+Hash value:
+73 % 11 = 7
+
+Index 7 contains 73.
+
+Probes = 1
+
+
+Search for 12 using Linear Probing:
+
+12 % 11 = 1
+
+Probe 1 -> Index 1 -> 23
+Probe 2 -> Index 2 -> 13
+Probe 3 -> Index 3 -> Empty
+
+Therefore, 12 is not found.
+
+Number of probes = 3
+
+
+Search for 12 using Quadratic Probing:
+
+12 % 11 = 1
+
+Probe 1 -> Index 1 -> 23
+Probe 2 -> Index 2 -> 13
+Probe 3 -> Index 5 -> Empty
+
+Therefore, 12 is not found.
+
+Number of probes = 3
+
+
+Search for 12 using Double Hashing:
+
+h1(12) = 12 % 11 = 1
+
+h2(12) = 7 - (12 % 7)
+       = 7 - 5
+       = 2
+
+Probe 1 -> Index 1 -> 23
+Probe 2 -> Index 3 -> Empty
+
+Therefore, 12 is not found.
+
+Number of probes = 2
+
+
+5. SEARCH RESULTS
+------------------
+
+| Key | Status         | Linear | Quadratic | Double Hashing |
+|-----|----------------|--------|-----------|----------------|
+| 53  | Existing       | 1      | 1         | 1              |
+| 73  | Existing       | 1      | 1         | 1              |
+| 12  | Non-existing   | 3      | 3         | 2              |
+
+
+6. LOAD FACTOR
+---------------
+
+Number of keys (n) = 7
+Hash table size (m) = 11
+
+Load factor:
+
+α = n / m
+  = 7 / 11
+  = 0.6364
+
+Load factor = 63.64%
+
+
+7. OBSERVATION
+--------------
+
+All seven booking IDs have different initial hash positions.
+
+Therefore, no collision occurs during insertion for this particular input.
+
+The search for non-existing key 12 requires:
+Linear Probing     = 3 probes
+Quadratic Probing  = 3 probes
+Double Hashing     = 2 probes

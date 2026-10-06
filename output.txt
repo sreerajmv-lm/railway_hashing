@@ -1,0 +1,49 @@
+LINEAR PROBING
+[0] : 33
+[1] : 23
+[2] : 13
+[3] : EMPTY
+[4] : EMPTY
+[5] : EMPTY
+[6] : EMPTY
+[7] : 73
+[8] : 63
+[9] : 53
+[10] : 43
+
+QUADRATIC PROBING
+[0] : 33
+[1] : 23
+[2] : 13
+[3] : EMPTY
+[4] : EMPTY
+[5] : EMPTY
+[6] : EMPTY
+[7] : 73
+[8] : 63
+[9] : 53
+[10] : 43
+
+DOUBLE HASHING
+[0] : 33
+[1] : 23
+[2] : 13
+[3] : EMPTY
+[4] : EMPTY
+[5] : EMPTY
+[6] : EMPTY
+[7] : 73
+[8] : 63
+[9] : 53
+[10] : 43
+
+LOAD FACTOR = 0.6364
+
+SEARCH RESULTS
+Key	Linear	Quadratic	Double Hash
+53	1	1		1
+73	1	1		1
+12	3	3		2
+
+
+** Process exited - Return Code: 0 **
